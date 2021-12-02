@@ -78,32 +78,6 @@ bool InitialPassASTConsumer::HandleTopLevelDecl(DeclGroupRef d)
 
 bool InitialPassRecursiveASTVisitor::VisitCXXMethodDecl(CXXMethodDecl* f) 
 {
-  if (f->hasBody())
-  {
-    // Get name of function
-    const DeclarationNameInfo dni = f->getNameInfo();
-    const DeclarationName dn      = dni.getName();
-    const std::string fname       = dn.getAsString();
-
-    if(fname.find("kernel_") != std::string::npos)
-    {
-      const QualType qThisType       = f->getThisType();   
-      const QualType classType       = qThisType.getTypePtr()->getPointeeType();
-      const std::string thisTypeName = classType.getAsString();
-      
-      if(thisTypeName == std::string("class ") + MAIN_CLASS_NAME || thisTypeName == std::string("struct ") + MAIN_CLASS_NAME)
-      {
-        //ProcessKernelDef(f);
-        std::cout << "found kernel:\t" << fname.c_str() << " of type:\t" << thisTypeName.c_str() << std::endl;
-      }
-    }
-    else if(fname == MAIN_NAME)
-    {
-      std::cout << "OK, main function has found:\t" << fname.c_str() << std::endl;
-      //f->dump();
-    }
-  }
-
   return true; // returning false aborts the traversal
 }
 
