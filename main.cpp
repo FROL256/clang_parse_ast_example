@@ -99,8 +99,8 @@ bool InitialPassRecursiveASTVisitor::VisitCXXMethodDecl(CXXMethodDecl* f)
     }
     else if(fname == MAIN_NAME)
     {
-      std::cout << "main function has found:\t" << fname.c_str() << std::endl;
-      f->dump();
+      std::cout << "OK, main function has found:\t" << fname.c_str() << std::endl;
+      //f->dump();
     }
   }
 
@@ -147,10 +147,10 @@ int main(int argc, const char **argv)
   
   {
     compiler.getLangOpts().GNUMode = 1; 
-    //compiler.getLangOpts().CXXExceptions = 1; 
     compiler.getLangOpts().RTTI        = 1; 
     compiler.getLangOpts().Bool        = 1; 
     compiler.getLangOpts().CPlusPlus   = 1; 
+    compiler.getLangOpts().CPlusPlus11 = 1;
     compiler.getLangOpts().CPlusPlus14 = 1;
     compiler.getLangOpts().CPlusPlus17 = 1;
   }
@@ -159,15 +159,6 @@ int main(int argc, const char **argv)
   
   compiler.createPreprocessor(clang::TU_Complete);
   compiler.getPreprocessorOpts().UsePredefines = false;
-  //{
-  //  compiler.getLangOpts().GNUMode = 1; 
-  //  //compiler.getLangOpts().CXXExceptions = 1; 
-  //  compiler.getLangOpts().RTTI        = 1; 
-  //  compiler.getLangOpts().Bool        = 1; 
-  //  compiler.getLangOpts().CPlusPlus   = 1; 
-  //  compiler.getLangOpts().CPlusPlus14 = 1;
-  //  compiler.getLangOpts().CPlusPlus17 = 1;
-  //}
   compiler.createASTContext();
 
   const FileEntry *pFile = compiler.getFileManager().getFile(fileName).get();

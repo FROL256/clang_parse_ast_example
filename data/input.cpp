@@ -10,7 +10,8 @@ struct TestClass
   void kernel_Init(unsigned int* flags, unsigned int tid);      
   
   void kernel_TestColor(const unsigned int* flags, 
-                        unsigned int* out_color, unsigned int tid);
+                        [[kslicer::size(tid)]] unsigned int* out_color, 
+                        unsigned int tid);
 
   void MainFunc(unsigned int* out_color, unsigned int tid);
 };
@@ -21,7 +22,8 @@ void TestClass::kernel_Init(unsigned int* flags, unsigned int tid)
 }      
   
 void TestClass::kernel_TestColor(const unsigned int* flags, 
-                                 unsigned int* out_color, unsigned int tid)
+                                 unsigned int* out_color, 
+                                 unsigned int tid)
 {
   if(flags[tid] == 1)
     out_color[tid] = 0x00000000;

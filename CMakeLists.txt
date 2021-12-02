@@ -17,12 +17,13 @@ message("${LLVM_INCLUDE_DIRS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_executable(test 
-               main.cpp)
+               main.cpp
+               attributes.cpp)
 
-target_link_libraries(test PRIVATE -lclang -lLLVM-10 
-                     -lclangAST -lclangTooling -lclangBasic -lclangASTMatchers 
-                     -lclangFrontendTool -lclangFrontend -lclangDriver -lclangSerialization 
-                     -lclangCodeGen -lclangParse -lclangSema -lclangStaticAnalyzerFrontend 
-                     -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangAnalysis
-                     -lclangIndex -lclangARCMigrate -lclangRewrite -lclangAST -lclangLex -lclangEdit
+target_link_libraries(test PRIVATE -lclang -lLLVM-12 
+                                   -lclangAST -lclangTooling -lclangBasic -lclangASTMatchers 
+                                   -lclangFrontendTool -lclangFrontend -lclangDriver -lclangSerialization 
+                                   -lclangCodeGen -lclangParse -lclangSema -lclangStaticAnalyzerFrontend 
+                                   -lclangStaticAnalyzerCheckers -lclangStaticAnalyzerCore -lclangAnalysis
+                                   -lclangIndex -lclangARCMigrate -lclangRewrite -lclangAST -lclangLex -lclangEdit
                      ) 
